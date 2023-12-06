@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 
 export default function App() {
-  const [dimensions, setDimension] = useState({
-    window: Dimensions.get("window"),
-  });
+ 
+const windowWidth=useWindowDimensions().width
+const windowHight = useWindowDimensions().height
+ 
 
-  useEffect(() => {
-    const subscription = Dimensions.addEventListener("change", ({ window }) => {
-      setDimension(window);
-    });
-    return () => subscription?.remove();
-  },[window]);
-
-  const {window} = dimensions
-  const windowWidth=window?.width
-  const windowHight = window?.height
-
+  
   return (
     <View style={styles.container}>
       <View style={[styles.box ,{width: windowWidth > 500 ? "70%" : "90%",height: windowHight > 600 ? "60%" : "90%",},]}>
